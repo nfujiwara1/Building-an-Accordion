@@ -48,7 +48,7 @@
 //   console.log(accordionHeader) // accordion header eleemnt to be selected
 //   accordionHeader.addEventListener('click', function(e){ // add eventlistner to the accordion header element
 //     accordion.classList.toggle('is-open') // add/remove 'is-open' class to the accordion element to open/clsoe the content
-//     console.log(e.target)
+//     console.log(accordion)
 //   })
 // })
 
@@ -74,6 +74,18 @@ accordionContainer.addEventListener('click', function(e){
   const accordionHeader = e.target.closest('.accordion__header') // to check if the accordion_header is an ancestor of the event target
   if(accordionHeader){
     const accordion = accordionHeader.parentElement // parent element of the accordion header where 'is-open" needs to be added/removed
+    const accordionContent = accordionHeader.nextElementSibling
+    const accordionInner = accordionContent.children[0]
+
+    let height 
+
+    if(accordion.classList.contains('is-open')){
+      height = 0
+    }else{
+      height = accordionInner.getBoundingClientRect().height
+    }
+    
     accordion.classList.toggle('is-open') // add/remove 'is-open' class
+    accordionContent.style.height = height + 'px'
   }
 })
